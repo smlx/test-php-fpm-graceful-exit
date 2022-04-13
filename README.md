@@ -1,6 +1,6 @@
 # Graceful php-fpm shutdown
 
-This repo tests php-fpm graceful shutdown configuration for https://github.com/uselagoon/lagoon-images.
+This repo tests php-fpm graceful shutdown configuration for https://github.com/uselagoon/lagoon-images/pull/445
 
 It works by using `docker-compose` to run an nginx backed by two `php-fpm` instances.
 One instance is patched for graceful shutdown, while the other is not.
@@ -10,13 +10,13 @@ The `Makefile` brings up the services, kicks off a request to each of the "good"
 This causes the `sleep()` to be interrupted and the request to return.
 
 In the case of the "good" backend the master `php-fpm` process waits gracefully for the response before exiting.
-In the case of the "bad" backend the master `php-fpm` process kills the worker and exits immediately, return ing a `502`.
+In the case of the "bad" backend the master `php-fpm` process kills the worker and exits immediately, returning a `502`.
 
 ## Usage
 
 1. Check out the [php-fpm-graceful-shutdown branch](https://github.com/uselagoon/lagoon-images/tree/php-fpm-graceful-shutdown) of lagoon-images.
 2. In that branch `make build/php-8.1-fpm` to produce a local tagged image `lagoon/php-8.1-fpm`.
-3. In this repo run `make -j4 -O`
+3. Check out this repo, and run `make -j4 -O`
 4. See the patched `lagoon/php-8.1-fpm` return a `200` while the unpatched `uselagoon/php-8.1-fpm:22.4.0` returns a `502`.
 
 Example output:
