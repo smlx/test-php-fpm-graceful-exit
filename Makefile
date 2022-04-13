@@ -7,7 +7,7 @@ up:
 	docker-compose up --build --force-recreate -d --remove-orphans
 
 .PHONY: down
-down:
+down: up
 	sleep 8
 	docker-compose down
 
